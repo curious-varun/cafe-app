@@ -1,10 +1,14 @@
+import React from 'react';
 import { View, Text } from 'react-native';
 
-export default function MenuScreen() {
+
+export default function CartScreen() {
   return (
     <View>
-      <Text> account page</Text>
+      <Text>
+        menu page
+      </Text>
     </View>
-
   );
 }
+
