@@ -86,7 +86,7 @@ export default function TabLayout() {
               headerShown: false,
               tabBarIcon: ({ focused }) =>
                 focused ? (
-                  <View className="flex flex-row flex-1 min-w-[112px] min-h-14 mt-4 justify-center items-center rounded-full overflow-hidden gap-2 bg-gradient-to-br from-[#C67C4E] via-rgba(198, 124, 78, 0.7) to-rgba(198, 124, 78, 0.8)">
+                  <View className="flex flex-row flex-1 min-w-[112px] min-h-14 mt-4 justify-center items-center rounded-full overflow-hidden gap-2 bg-gradient-to-br from-[#C67C4E] via-[#C67C4E]/80 to-[#C67C4E]/50">
                     <Image
                       source={route.filledImage}
                       style={{ width: 20, height: 20 }}
