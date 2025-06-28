@@ -55,7 +55,8 @@ export default function TabLayout() {
           alignItems: "center",
         },
         tabBarStyle: {
-          backgroundColor: "white",
+          // backgroundColor: '#2d2d2d',
+          backgroundColor: '#ffff',
           borderRadius: 50,
           marginHorizontal: 12,
           paddingHorizontal: 2,
@@ -64,7 +65,8 @@ export default function TabLayout() {
           position: "absolute",
           overflow: "hidden",
           borderWidth: 2,
-          borderColor: "white",
+          // borderColor: "#2d2d2d",
+          borderColor: "#ffff",
           //shadow 
           shadowColor: "#000",
           shadowOffset: { width: 5, height: 4 },
@@ -84,7 +86,7 @@ export default function TabLayout() {
               headerShown: false,
               tabBarIcon: ({ focused }) =>
                 focused ? (
-                  <View className="flex flex-row flex-1 min-w-[112px] min-h-14 mt-4 justify-center items-center rounded-full overflow-hidden gap-2 bg-gradient-to-br from-[#C67C4E] via-[#C67C4E]/70 to-[#C67C4E]/60">
+                  <View className="flex flex-row flex-1 min-w-[112px] min-h-14 mt-4 justify-center items-center rounded-full overflow-hidden gap-2 bg-gradient-to-br from-[#C67C4E] via-rgba(198, 124, 78, 0.7) to-rgba(198, 124, 78, 0.8)">
                     <Image
                       source={route.filledImage}
                       style={{ width: 20, height: 20 }}
