@@ -1,35 +1,20 @@
-import React from 'react';
-import { Link, Stack } from 'expo-router';
-import { StyleSheet, Text, View } from 'react-native';
+// app/404.tsx or app/_not-found.tsx
+import React, { useEffect } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { useRouter, Stack } from 'expo-router';
 
 export default function NotFoundScreen() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      router.replace('/');
+    }, 100);
+    return () => clearTimeout(timeout);
+  }, []);
+
   return (
     <>
-      <Stack.Screen options={{ title: 'Oops!' }} />
-      <View style={styles.container}>
-        <Text style={styles.text}>This screen doesn't exist.</Text>
-        <Link href="/" style={styles.link}>
-          <Text>Go to home screen!</Text>
-        </Link>
-      </View>
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  text: {
-    fontSize: 20,
-    fontWeight: 600,
-  },
-  link: {
-    marginTop: 15,
-    paddingVertical: 15,
-  },
-});
-

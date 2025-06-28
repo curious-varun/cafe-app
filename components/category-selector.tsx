@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { ScrollView, TouchableOpacity, Text, View } from 'react-native';
 
-const categories = ['All Coffee', 'Machiato', 'Latte', 'Americano', 'Espresso', 'Cappuccino'];
+const categories = ['All', 'Snacks', 'cold drinks', 'coffee', 'pasta', 'fast bytes'];
+
 
 export default function CategorySelector() {
   const [selected, setSelected] = useState('All Coffee');
@@ -32,7 +33,11 @@ export default function CategorySelector() {
             </TouchableOpacity>
           );
         })}
+        <View className='w-4' />
       </ScrollView>
+      <View className='mt-16 px-4'>
+        <Text> hi i am varun </Text>
+      </View>
     </View>
   );
 }

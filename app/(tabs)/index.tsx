@@ -51,7 +51,8 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#F9F9F9'
+    // backgroundColor: 'white'
   },
   header: {
     height: screenHeight * 0.4,
