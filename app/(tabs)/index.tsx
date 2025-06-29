@@ -4,14 +4,12 @@ import {
   Text,
   View,
   Image,
-  Dimensions,
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import CategorySelector from '@/components/category-selector';
 
-const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 
 export default function HomeScreen() {
   const scrollY = useRef(new Animated.Value(0)).current;
@@ -51,6 +49,7 @@ export default function HomeScreen() {
         <Animated.View
           style={{
             transform: [{ translateY: cardTranslateY }, { scale: cardScale }],
+            zIndex: 100,
           }}
         >
           <LinearGradient
@@ -63,7 +62,7 @@ export default function HomeScreen() {
               <Text style={styles.cardNumber}>4342</Text>
               <View style={styles.flameContainer}>
                 <Image
-                  source={require("../../assets/images/point.png")}
+                  source={require("../../assets/images/star-line-white.png")}
                   style={styles.flameIcon}
                 />
               </View>
@@ -82,6 +81,19 @@ export default function HomeScreen() {
             </View>
           </LinearGradient>
         </Animated.View>
+      </View>
+      <View style={{
+        zIndex: -100,
+        marginTop: 25,
+        marginBottom: -35,
+        marginHorizontal: 'auto',
+      }} >
+        <Text style={{
+          fontSize: 18, fontFamily: 'visby-demibold'
+        }}>
+          Every Cup, A Little More
+          <Text style={{ color: '#955D3B', fontFamily: "visby-extrabold" }}> Rewarding.</Text>
+        </Text>
       </View>
       <CategorySelector />
     </Animated.ScrollView >
@@ -118,7 +130,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   gradientCard: {
-    width: screenWidth * 0.85,
+    width: 350,
     height: 170,
     alignSelf: 'center',
     marginTop: 28,

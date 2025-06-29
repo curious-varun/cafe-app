@@ -16,6 +16,8 @@ export default function RootLayout() {
     'Inter-Medium': Inter_500Medium,
     'Inter-SemiBold': Inter_600SemiBold,
     'Inter-Bold': Inter_700Bold,
+    'visby-extrabold': require('../assets/fonts/VisbyRoundCF-ExtraBold.otf'),
+    "visby-demibold": require('../assets/fonts/VisbyRoundCF-DemiBold.otf'),
   });
 
   useEffect(() => { if (fontsLoaded || fontError) SplashScreen.hideAsync(); }, [fontsLoaded, fontError]);
