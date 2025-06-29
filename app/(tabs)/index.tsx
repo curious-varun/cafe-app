@@ -1,13 +1,43 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import {
+  Animated,
+  Text,
+  View,
+  Image,
+  Dimensions,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { View, Text, Image, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
 import CategorySelector from '@/components/category-selector';
 
 const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
 
 export default function HomeScreen() {
+  const scrollY = useRef(new Animated.Value(0)).current;
+
+  const cardTranslateY = scrollY.interpolate({
+    inputRange: [0, 100],
+    outputRange: [0, -60],
+    extrapolate: 'clamp',
+  });
+
+  const cardScale = scrollY.interpolate({
+    inputRange: [0, 100],
+    outputRange: [1, 1.04],
+    extrapolate: 'clamp',
+  });
+
   return (
-    <View style={styles.container}>
+    <Animated.ScrollView
+      style={styles.container}
+      showsVerticalScrollIndicator={false}
+      scrollEventThrottle={16}
+      onScroll={Animated.event(
+        [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+        { useNativeDriver: true }
+      )}
+    >
       <View style={styles.header} className='bg-gradient-to-b from-[#111111] to-[#313131] '>
         {/* Greeting & Profile */}
         <View style={styles.greetingContainer}>
@@ -17,34 +47,44 @@ export default function HomeScreen() {
           </TouchableOpacity>
         </View>
 
-        {/* Gradient Card */}
-        <LinearGradient
-          colors={['#A65634', '#B96A3F', '#C67C4E']}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 1 }}
-          style={styles.gradientCard}
+        {/* Gradient Card with Parallax */}
+        <Animated.View
+          style={{
+            transform: [{ translateY: cardTranslateY }, { scale: cardScale }],
+          }}
         >
-          {/* Card Number and Flame Icon */}
-          <View style={styles.cardTopRow}>
-            <Text style={styles.cardNumber}>4342</Text>
-            <View style={styles.flameContainer}>
-              <Image
-                source={require("../../assets/images/point.png")}
-                style={styles.flameIcon}
-              />
+          <LinearGradient
+            colors={['#A65634', '#B96A3F', '#C67C4E']}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={styles.gradientCard}
+          >
+            <View style={styles.cardTopRow}>
+              <Text style={styles.cardNumber}>4342</Text>
+              <View style={styles.flameContainer}>
+                <Image
+                  source={require("../../assets/images/point.png")}
+                  style={styles.flameIcon}
+                />
+              </View>
             </View>
-          </View>
 
-          {/* Card Footer Info */}
-          <View style={styles.cardFooter}>
-            <Text style={styles.footerText}>Jude Kyllan Jr.</Text>
-            <Text style={styles.footerSubText}>Exp: 09/29</Text>
-          </View>
-        </LinearGradient>
+            <View style={styles.cardFooter}>
+              {/* <Text */}
+              <View className='flex-row gap-1'>
+                <Text style={styles.footerText} className='text-white/60'>Points Earned:</Text>
+                <Text style={styles.footerText}>3233</Text>
+              </View>
+              <View className='flex-row gap-1 bg-gradient-to-r from-gray-100/10 to-gray-50/10 px-2 rounded-full pb-0.5 items-center justify-center'>
+                <Text style={styles.footerText} className='text-white/60'>Rewards Earned:</Text>
+                <Text style={styles.footerText}>22</Text>
+              </View>
+            </View>
+          </LinearGradient>
+        </Animated.View>
       </View>
-
       <CategorySelector />
-    </View>
+    </Animated.ScrollView >
   );
 }
 
@@ -52,15 +92,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F9F9F9'
-    // backgroundColor: 'white'
   },
   header: {
-    height: screenHeight * 0.4,
+    height: 280,
     paddingTop: 60,
     paddingHorizontal: 20,
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
-    // backgroundColor: '#2d2d2d',
   },
   greetingContainer: {
     flexDirection: 'row',
@@ -83,13 +121,17 @@ const styles = StyleSheet.create({
     width: screenWidth * 0.85,
     height: 170,
     alignSelf: 'center',
-    marginTop: 35,
+    marginTop: 28,
+    marginBottom: 20,
     borderRadius: 20,
     padding: 20,
     justifyContent: 'space-between',
-    shadowColor: "#FFFF",
+    shadowColor: "#C67C4E",
+    shadowOpacity: 0.6,
+    zIndex: 100,
+    // shadowColor: "#FFFF",
+    // shadowOpacity: 0.3,
     shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.3,
     shadowRadius: 15,
     elevation: 8,
   },
@@ -97,7 +139,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: 'rgba(0,0,0,0.1)',
+    // backgroundColor: 'rgba(0,0,0,0.1)',
     borderRadius: 12,
     paddingHorizontal: 20,
     paddingVertical: 16,
@@ -135,4 +177,3 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
 });
-
